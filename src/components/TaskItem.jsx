@@ -5,25 +5,43 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-export default function TaskItem({card}){
+import LigthBox from './LightBox';
+import EditNoteForm from "./EditNoteForm";
+import HandlerNotes from "./HandlerNotes";
+export default function TaskItem({card,deleteNote}){
     return(
         <>
-        <Grid item key={card} xs={12} sm={6} md={4}>
+        <Grid item key={card.id} xs={12} sm={6} md={4}>
             <Card
                 sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
             >
                 <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {card.author}
+                        {card.title}
                     </Typography>
                     <Typography>
-                        {card.text} 
+                        {card.content} 
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Ver</Button>
-                    <Button size="small">Editar</Button>
-                    <Button size="small">Eliminar</Button>
+                    <LigthBox 
+                    handleEventEl={<Button size="small">Ver</Button>}
+                    content={
+                        <>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {card.title}
+                        </Typography>
+                        <Typography>
+                            {card.content} 
+                        </Typography>
+                        </>
+                    }
+                    />
+                    <LigthBox 
+                    handleEventEl={<Button size="small">Editar</Button>}
+                    content={<HandlerNotes><EditNoteForm card={card}/></HandlerNotes>}
+                    />
+                    <Button onClick={()=>deleteNote(card.id)}size="small">Eliminar</Button>
                 </CardActions>
             </Card>
         </Grid>

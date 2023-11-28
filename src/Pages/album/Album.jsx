@@ -9,7 +9,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TaskList from '../../components/TaskList';
 import LigthBox from '../../components/LightBox';
-
+import HandlerNotes from '../../components/HandlerNotes';
+import NewNoteForm from '../../components/newNoteForm';
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
@@ -21,6 +22,7 @@ export default function Album() {
         <Toolbar>
           <LigthBox
             handleEventEl={<NoteAddIcon sx={{ mr: 2 }} />}
+            content={<HandlerNotes><NewNoteForm/></HandlerNotes>}
           />
           <Typography variant="h6" color="inherit" noWrap>
             Agregar una Nueva Nota
@@ -49,7 +51,9 @@ export default function Album() {
         </Box>
         <Container sx={{ py: 5 }} maxWidth="md">
           {/* End hero unit */}
-          <TaskList/>
+          <HandlerNotes>
+            <TaskList/>
+          </HandlerNotes>
         </Container>
       </main>
       
